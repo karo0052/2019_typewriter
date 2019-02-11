@@ -1,27 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Typewriter</title>
-    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
-    
-    <style> 
-        #typewriter {
-            font-family: 'Special Elite', cursive;        
-        }
+    <link
+      href="https://fonts.googleapis.com/css?family=Special+Elite"
+      rel="stylesheet"
+    />
+
+    <style>
+      #typewriter {
+        font-family: "Special Elite", cursive;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <button>Activate sound</button>
     <h1 id="typewriter">This text is written one character at a time</h1>
 
     <div id="sounds">
-        <audio id="typekey1" src="typekey1.mp3"></audio>
-        <audio id="typekey2" src="typekey2.mp3"></audio>
-        <audio id="typespace" src="typespace.mp3"></audio>
+      <audio id="typekey1" src="typekey1.mp3"></audio>
+      <audio id="typekey2" src="typekey2.mp3"></audio>
+      <audio id="typespace" src="typespace.mp3"></audio>
     </div>
+    <script>
+      "use strict";
+      window.addEventListener("DOMContentLoaded", init);
 
-    <script src="typewriter.js"></script>
-</body>
+      const dest = document.querySelector("#typewriter");
+      let text = document.querySelector("#typewriter").textContent;
+      let counter;
+
+      function init() {
+        console.log("init");
+        counter = 0;
+        dest.textContent = "";
+        loop();
+      }
+      function loop() {
+        console.log("loop");
+        if (text.length > counter) {
+          //find text from 0 to counter with substring
+          counter++;
+          let textLength = text.substring(0, counter);
+          dest.textContent = textLength;
+          document.querySelector("#typekey1").play();
+          console.log(counter);
+          console.log(textLength);
+          setTimeout(loop, 400);
+        }
+      }
+    </script>
+    <!-- <script src="typewriter.js"></script> -->
+  </body>
 </html>
